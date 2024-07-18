@@ -1,0 +1,115 @@
+﻿@model EmployeeApplication.Models.Employee
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="content">
+    <h4 class="page-title">Edit Employee</h4>
+
+        <div class="page-content-wrapper">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card m-b-20">
+                        <div class="card-body">
+                        <form class="form-horizontal" asp-controller="Employee" asp-action="Edit" method="post">
+                                @Html.AntiForgeryToken()
+                            <input name="__EmployeeId" type="hidden" id="__EmployeeId" value="@ViewBag.Id">
+                                <h5><small class="text-muted">Fill in all required entry fields to complete.</small></h5>
+                            <div class="form-group">
+                                <div class="row col-md-12">
+                                    <div class="col-md-6">
+                                        <label>Employee No:</label><font style="color: red;"> *</font>
+                                        <input type="text" class="form-control" name="EmpNo" value="@Model.EmpNo" required />
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6">
+                                            <label>Employee Name:</label><font style="color: red;"> *</font>
+                                        <input type="text" class="form-control" name="Name" value="@Model.Name" required />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>IC No:</label><font style="color: red;"> *</font>
+                                        <input type="text" class="form-control" name="ICNo" value="@Model.ICNo" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6">
+                                            <label>Date of Birth:</label><font style="color: red;"> *</font>
+                                        <input type="date" name="DateOfBirth" class="form-control" placeholder="dd/MM/yyyy" value="@ViewBag.DateOfBirth" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Hired Date:</label><font style="color: red;"> *</font>
+                                        <input type="date" name="HiredDate" class="form-control" placeholder="dd/MM/yyyy" value="@ViewBag.HiredDate" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6">
+                                            <label>Department:</label><font style="color: red;"> *</font>
+                                        <select id="Department" name="Department" asp-items="@(ViewBag.Department)" class="form-control" required>
+                                            <option value="@Model.Department" selected="selected">@Model.Department</option>
+                                        </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Occupation:</label><font style="color: red;"> *</font>
+                                        <select id="Occupation" name="Occupation" asp-items="@(ViewBag.Occupation)" class="form-control" required>
+                                            <option value="@Model.Occupation" selected="selected">@Model.Occupation</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6">
+                                            <label>Nationality:</label><font style="color: red;"> *</font>
+                                        <select id="Nationality" name="Nationality" asp-items="@(ViewBag.Nationality)" class="form-control" required>
+                                            <option value="@Model.Nationality" selected="selected">@Model.Nationality</option>
+                                        </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <label for="">Gender:</label>
+                                        <fieldset id="useraccess">
+                                            <label><input name="gender" value="Male" type="radio" @(((string)Model.Gender == "Male") ? "checked" : "") />Male</label>
+                                            <label><input name="gender" value="Female" type="radio" @(((string)Model.Gender == "Female") ? "checked" : "") />Female</label>
+                                        </fieldset>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="form-group">
+                                    <div>
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                                Save
+                                            </button>
+                                            <a href="@Url.Action("Index","Employee")" class="btn btn-secondary waves-effect m-l-5">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+@section Scripts
+                                                {
+    <script>
+        function checkForm(form) // Submit button clicked
+        {
+            //
+            // check form input values
+            //
+
+            form.btnconfirm.value = "Please wait...";
+            form.btnconfirm.disabled = true;
+            return true;
+        }
+    </script>
+}

@@ -1,0 +1,92 @@
+﻿@model List<EmployeeApplication.Models.Employee>
+@{
+    ViewData["Title"] = "Employee Page";
+}
+
+
+<h2>Employee Records</h2>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button class="close" aria-label="Close" type="button" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+        </button>
+        <strong>Oh Snap!</strong> @TempData["Error"]
+    </div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button class="close" aria-label="Close" type="button" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+        </button>
+        <strong>Well done!</strong> @TempData["Success"]
+    </div>
+}
+<div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
+    <div class="d-none d-md-block">
+        <a class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" role="button" href="@Url.Action("Create","Employee")">Create</a>
+    </div>
+</div>
+<div class="table-responsive mg-t-5">
+    <table class="table table-invoice bd-b">
+        <thead>
+            <tr>
+                <th class="wd-5p">Employee No</th>
+                <th class="wd-10p">Employee Name</th>
+                <th class="wd-15p">IC No</th>
+                <th class="wd-10p">Gender</th>
+                <th class="wd-10p">Date of Birth</th>
+                <th class="wd-10p">Nationality</th>
+                <th class="wd-10p">Hired Date</th>
+                <th class="wd-10p">Department</th>
+                <th class="wd-10p">Occuaption</th>
+                <th class="wd-5p">Edit</th>
+                <th class="wd-5p">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.EmpNo</td>
+                    <td>@item.Name</td>
+                    <td>@item.ICNo</td>
+                    <td>@item.Gender</td>
+                    <td>@String.Format("{0:dd/MM/yyyy}", @item.DateOfBirth)</td>
+                    <td>@item.Nationality</td>
+                    <td>@String.Format("{0:dd/MM/yyyy}", @item.HiredDate)</td>
+                    <td>@item.Department</td>
+                    <td>@item.Occupation</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Employee", new { id = item.Id})" class="btn btn-primary btn-sm" role="button" >Edit</a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Delete", "Employee", new { id = item.Id})" class="btn btn-primary btn-sm" role="button" onclick="return confirm('Are you sure you want to delete employee?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts
+{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function checkForm(form) // Submit button clicked
+        {
+            //
+            // check form input values
+            //
+
+            form.btnconfirm.value = "Please wait...";
+            form.btnconfirm.disabled = true;
+            return true;
+        }
+    </script>
+}
+
+
+
